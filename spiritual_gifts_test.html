@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spiritual Gifts Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; padding: 20px; }
+        .question { margin-bottom: 15px; }
+        .result { margin-top: 20px; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h1>Spiritual Gifts Test</h1>
+    <p>Answer the following questions honestly to discover your spiritual gifts.</p>
+    
+    <form id="giftsTest">
+        <script>
+            const questions = [
+                { text: "I enjoy organizing and managing tasks to achieve goals.", gift: "Administration" },
+                { text: "I create efficient systems to ensure tasks are completed.", gift: "Administration" },
+                { text: "I feel called to start new ministries or churches.", gift: "Apostleship" },
+                { text: "I thrive in pioneering new efforts to expand God’s work.", gift: "Apostleship" },
+                { text: "I use my skills to create things that bring glory to God.", gift: "Craftsmanship" },
+                { text: "I enjoy working with my hands to build or repair items.", gift: "Craftsmanship" },
+                { text: "I can sense whether something is from God or not.", gift: "Discernment" },
+                { text: "I quickly recognize the truth or falsehood in teachings.", gift: "Discernment" },
+                { text: "I feel a strong desire to share the gospel with others.", gift: "Evangelism" },
+                { text: "I enjoy explaining the message of salvation to people.", gift: "Evangelism" },
+                { text: "I frequently encourage others during difficult times.", gift: "Exhortation" },
+                { text: "I enjoy motivating others to grow spiritually.", gift: "Exhortation" },
+                { text: "I trust God completely, even in difficult situations.", gift: "Faith" },
+                { text: "I am confident that God will act, even when others doubt.", gift: "Faith" },
+                { text: "I give generously and joyfully to support God’s work.", gift: "Giving" },
+                { text: "I look for ways to share my resources with others.", gift: "Giving" },
+                { text: "I feel led to pray for people to be healed.", gift: "Healing" },
+                { text: "I have witnessed or experienced healing through prayer.", gift: "Healing" },
+                { text: "I enjoy assisting others with their tasks.", gift: "Helps" },
+                { text: "I find fulfillment in serving others behind the scenes.", gift: "Helps" },
+                { text: "I create welcoming environments for guests and strangers.", gift: "Hospitality" },
+                { text: "I enjoy hosting people in my home or church.", gift: "Hospitality" },
+                { text: "I love studying the Bible and discovering deep truths.", gift: "Knowledge" },
+                { text: "I enjoy learning and sharing what I have discovered.", gift: "Knowledge" },
+                { text: "I excel at guiding and motivating others toward a vision.", gift: "Leadership" },
+                { text: "I can inspire others to work together for a common goal.", gift: "Leadership" },
+                { text: "I empathize deeply with people who are hurting.", gift: "Mercy" },
+                { text: "I am drawn to helping those in emotional or physical pain.", gift: "Mercy" },
+                { text: "I have faith that God can perform miracles today.", gift: "Miracles" },
+                { text: "I trust God to intervene in supernatural ways.", gift: "Miracles" },
+                { text: "I enjoy guiding others in their spiritual journey.", gift: "Pastor/Shepherd" },
+                { text: "I feel responsible for nurturing people’s spiritual growth.", gift: "Pastor/Shepherd" },
+                { text: "I feel led to speak God’s truth, even when it’s difficult.", gift: "Prophecy" },
+                { text: "I sense God revealing specific messages for others.", gift: "Prophecy" },
+                { text: "I love explaining biblical truths in ways people can understand.", gift: "Teaching" },
+                { text: "I enjoy helping others apply biblical principles to their lives.", gift: "Teaching" },
+                { text: "I feel comfortable praying or speaking in unknown languages.", gift: "Tongues" },
+                { text: "I enjoy expressing worship in spiritual languages.", gift: "Tongues" },
+                { text: "I offer advice that aligns with God’s truth.", gift: "Wisdom" },
+                { text: "I often know the right course of action in difficult situations.", gift: "Wisdom" }
+            ];
+            
+            document.write('<div id="questions">');
+            questions.forEach((q, i) => {
+                document.write(`
+                    <div class="question" data-gift="${q.gift}">
+                        <p>${i + 1}. ${q.text}</p>
+                        <select>
+                            <option value="1">Never</option>
+                            <option value="2">Rarely</option>
+                            <option value="3">Sometimes</option>
+                            <option value="4">Often</option>
+                            <option value="5">Always</option>
+                        </select>
+                    </div>
+                `);
+            });
+            document.write('</div>');
+        </script>
+        
+        <button type="button" onclick="calculateResults()">See My Results</button>
+    </form>
+    
+    <div id="results" class="result"></div>
+    
+    <script>
+        function calculateResults() {
+            let scores = {};
+            document.querySelectorAll('.question').forEach(q => {
+                let gift = q.getAttribute('data-gift');
+                let value = parseInt(q.querySelector('select').value);
+                scores[gift] = (scores[gift] || 0) + value;
+            });
+            
+            let sortedGifts = Object.entries(scores).sort((a, b) => b[1] - a[1]);
+            let topGifts = sortedGifts.slice(0, 3).map(gift => `${gift[0]} (Score: ${gift[1]})`).join(', ');
+            document.getElementById("results").innerText = "Your top spiritual gifts are: " + topGifts;
+        }
+    </script>
+</body>
+</html>
